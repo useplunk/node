@@ -11,7 +11,7 @@ export class Plunk {
     this.client = axios.create({
       baseURL: options?.debug
         ? "http://localhost:8080"
-        : "https://api.useplunk.com",
+        : "https://api.useplunk.com/v1",
       headers: {
         Authorization: `Bearer ${this.key}`,
       },
