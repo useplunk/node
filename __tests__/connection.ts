@@ -7,5 +7,8 @@ test("Making a connection", async () => {
   // const success = await plunk.events.publish({
   //   event: "new-project",
   //   email: "hello@useplunk.com",
+  //   data: {
+  //     project: "Plunk",
+  //   },
   // });
 });
