@@ -33,10 +33,16 @@ const plunk = new Plunk("Your secret key");
 Used to publish an event
 
 ##### Parameters
-- String, the email of the lead you want to look up
+- `event`: The name of the event to publish
+- `email`: The email address of the user to publish the event to
+- `data` [Optional]: An object containing the data to attach to the user
+
 ```ts
 const success = await plunk.events.publish({
-  event: "new-project", 
-  email: "hello@useplunk.com"
+  event: "new-project",
+  email: "hello@useplunk.com",
+  data: {
+    company: "Plunk"
+  }
 });
 ```
