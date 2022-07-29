@@ -16,7 +16,6 @@ export class Plunk {
       headers: {
         Authorization: `Bearer ${this.key}`,
       },
-      withCredentials: true,
     });
   }
 
