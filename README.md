@@ -29,7 +29,7 @@ const plunk = new Plunk("Your secret key");
 
 ## API
 ### Events
-#### publish()
+#### track()
 Used to publish an event
 
 ##### Parameters
@@ -38,11 +38,28 @@ Used to publish an event
 - `data` [Optional]: An object containing the data to attach to the user
 
 ```ts
-const success = await plunk.events.publish({
+const success = await plunk.events.track({
   event: "new-project",
   email: "hello@useplunk.com",
   data: {
     company: "Plunk"
   }
+});
+```
+
+### Emails
+#### send()
+Used to send a transactional email
+##### Parameters
+- `to`: The email address of the recipient
+- `subject`: The subject of the email
+- `body`: The body of the email (HTML, plain text, or Markdown)
+- `withUnsubscribe` [Optional]: Whether to include an unsubscribe link hosted by Plunk in the email
+
+```ts
+const success = await plunk.emails.send({
+  to: "hello@useplunk.com",
+  subject: "Welcome to Plunk",
+  body: "# Hello world!",
 });
 ```

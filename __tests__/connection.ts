@@ -11,4 +11,11 @@ test("Making a connection", async () => {
   //     project: "Plunk",
   //   },
   // });
+
+  // Sending an email
+  // const success = await plunk.emails.send({
+  //   to: "hello@useplunk.com",
+  //   subject: "Welcome to Plunk",
+  //   body: "# Hello world!",
+  // });
 });
