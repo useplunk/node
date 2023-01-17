@@ -1,7 +1,11 @@
 import axios, { AxiosInstance } from "axios";
 import { request } from "../utils/request";
 import { PublishParams } from "../types/events";
-import {SendParams} from "../types/emails";
+import {
+  SendParams,
+  SendParamsWithoutTemplate,
+  SendParamsWithTemplate,
+} from "../types/emails";
 
 export class Plunk {
   private readonly key: string;
@@ -45,20 +49,17 @@ export class Plunk {
   emails = {
     /**
      * Sends a transactional email with Plunk
-     * @param {Object} email
-     * @param {string} email.to - The event you want to publish
-     * @param {string} email.subject - The event you want to publish
-     * @param {string} email.body - The email associated with this event
-     * @param {boolean=} email.withUnsubscribe - Whether to include an unsubscribe link hosted by Plunk in the email
      */
-    send: async ({ to, subject, body, withUnsubscribe }: SendParams) => {
+    send: async (body: SendParams) => {
       return await request<{
         success: true;
       }>(this.client, {
         method: "POST",
         url: "/send",
-        body: { to, subject, body, withUnsubscribe: withUnsubscribe ?? false },
+        body: {
+          ...body,
+        },
       });
     },
-  }
+  };
 }

@@ -6,6 +6,7 @@ This project contains the helper library for interacting with the Plunk API usin
 - [Getting started](#getting-started)
 - [API](#api)
     - [Events](#events)
+    - [Email](#emails)
 
 ![Card](https://www.useplunk.com/assets/card.png)
 
