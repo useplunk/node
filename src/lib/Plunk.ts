@@ -1,23 +1,17 @@
 import axios, { AxiosInstance } from "axios";
 import { request } from "../utils/request";
 import { PublishParams } from "../types/events";
-import {
-  SendParams,
-  SendParamsWithoutTemplate,
-  SendParamsWithTemplate,
-} from "../types/emails";
+import { SendParams } from "../types/emails";
 
 export class Plunk {
   private readonly key: string;
   private readonly client: AxiosInstance;
 
-  constructor(key: string, options?: { debug?: boolean }) {
+  constructor(key: string) {
     this.key = key;
 
     this.client = axios.create({
-      baseURL: options?.debug
-        ? "http://localhost:8080/v1"
-        : "https://api.useplunk.com/v1",
+      baseURL: "https://api.useplunk.com/v1",
       headers: {
         Authorization: `Bearer ${this.key}`,
       },
@@ -30,18 +24,17 @@ export class Plunk {
   events = {
     /**
      * Publishes an event to Plunk
-     * @param {Object} event
      * @param {string} event.event - The event you want to publish
      * @param {string} event.email - The email associated with this event
      * @param {Object=} event.data - The user data associated with this event
      */
-    track: async ({ event, email, data }: PublishParams) => {
+    track: async (event: PublishParams) => {
       return await request<{
         success: true;
       }>(this.client, {
         method: "POST",
         url: "/track",
-        body: { event, email, data },
+        body: { ...event },
       });
     },
   };
@@ -49,6 +42,10 @@ export class Plunk {
   emails = {
     /**
      * Sends a transactional email with Plunk
+     * @param {string} body.to - The email you want to send to
+     * @param {string} body.subject - The subject of the email
+     * @param {string} body.body - The body of the email
+     * @param {boolean=false} body.withUnsubscribe - Whether to include an unsubscribe link
      */
     send: async (body: SendParams) => {
       return await request<{

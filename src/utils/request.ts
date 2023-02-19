@@ -1,7 +1,6 @@
-import { AxiosError, AxiosInstance } from "axios";
+import axios, { AxiosInstance } from "axios";
 import { RequestType } from "../types/request";
 import { TokenError } from "../errors/TokenError";
-import { IErrorBody } from "../types/error";
 import { NotFoundError } from "../errors/NotFound";
 
 export function request<T>(client: AxiosInstance, request: RequestType) {
@@ -17,19 +16,23 @@ export function request<T>(client: AxiosInstance, request: RequestType) {
         },
         { status: number; data: T }
       >(config)
-      .then((res) => {
+      .then((res: { data: T | PromiseLike<T> }) => {
         resolve(res.data);
       })
-      .catch((err: AxiosError<IErrorBody>) => {
+      .catch((err) => {
+        if (!axios.isAxiosError(err)) {
+          reject(err);
+        }
+
         if (err.response?.status === 401) {
-          reject(new TokenError());
+          reject(new TokenError(err.response.data.message));
         }
 
         if (err.response?.status === 404) {
           reject(new NotFoundError(err.response.data.message));
         }
 
-        reject(err.response?.data.message);
+        reject(new Error(err.response?.data.message ?? "Unknown API Error"));
       });
   });
 }
