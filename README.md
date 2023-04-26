@@ -55,6 +55,8 @@ Used to send a transactional email
 - `to`: The email address of the recipient
 - `subject`: The subject of the email
 - `body`: The body of the email (HTML, plain text, or Markdown)
+- `from` [Optional]: The email address of the sender
+- `name` [Optional]: The name of the sender
 - `withUnsubscribe` [Optional]: Whether to include an unsubscribe link hosted by Plunk in the email
 
 ```ts
