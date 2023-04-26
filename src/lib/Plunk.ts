@@ -42,9 +42,12 @@ export class Plunk {
   emails = {
     /**
      * Sends a transactional email with Plunk
+     *
      * @param {string} body.to - The email you want to send to
      * @param {string} body.subject - The subject of the email
      * @param {string} body.body - The body of the email
+     * @param {string=} body.from - The email you want to send from
+     * @param {string=} body.name - The name you want to send as
      * @param {boolean=false} body.withUnsubscribe - Whether to include an unsubscribe link
      */
     send: async (body: SendParams) => {
