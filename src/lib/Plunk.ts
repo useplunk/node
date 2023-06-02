@@ -1,21 +1,54 @@
-import axios, { AxiosInstance } from "axios";
-import { request } from "../utils/request";
+import { fetch } from "native-fetch";
 import { PublishParams } from "../types/events";
 import { SendParams } from "../types/emails";
+import { NotFoundError } from "../errors/NotFound";
+import { TokenError } from "../errors/TokenError";
 
 export class Plunk {
   private readonly key: string;
-  private readonly client: AxiosInstance;
+
+  private async fetch<T>({
+    json,
+    url,
+    ...options
+  }: RequestInit & {
+    url: string;
+    json: any;
+    headers?: Record<string, string>;
+  }) {
+    const res = await fetch(
+      new URL(url, "https://api.useplunk.com/v1").toString(),
+      {
+        ...options,
+        headers: {
+          Authorization: `Bearer ${this.key}`,
+          ...(json && { "Content-Type": "application/json" }),
+          ...options.headers,
+        },
+        body: json ? JSON.stringify(json) : undefined,
+      }
+    );
+
+    const text = await res.text();
+
+    const data = safeJsonParse(text);
+
+    if (res?.status === 401) {
+      throw new TokenError(data?.message);
+    }
+
+    if (res?.status === 404) {
+      throw new NotFoundError(data?.message);
+    }
+
+    if (!res.ok) {
+      throw new Error(data?.message ?? "Unknown API Error");
+    }
+    return data as T;
+  }
 
   constructor(key: string) {
     this.key = key;
-
-    this.client = axios.create({
-      baseURL: "https://api.useplunk.com/v1",
-      headers: {
-        Authorization: `Bearer ${this.key}`,
-      },
-    });
   }
 
   /**
@@ -29,12 +62,12 @@ export class Plunk {
      * @param {Object=} event.data - The user data associated with this event
      */
     track: async (event: PublishParams) => {
-      return await request<{
+      return await this.fetch<{
         success: true;
-      }>(this.client, {
+      }>({
         method: "POST",
         url: "/track",
-        body: { ...event },
+        json: { ...event },
       });
     },
   };
@@ -51,15 +84,23 @@ export class Plunk {
      * @param {boolean=false} body.withUnsubscribe - Whether to include an unsubscribe link
      */
     send: async (body: SendParams) => {
-      return await request<{
+      return await this.fetch<{
         success: true;
-      }>(this.client, {
+      }>({
         method: "POST",
         url: "/send",
-        body: {
+        json: {
           ...body,
         },
       });
     },
   };
+}
+
+function safeJsonParse(text: string) {
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    return text;
+  }
 }
