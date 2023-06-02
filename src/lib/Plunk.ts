@@ -17,7 +17,7 @@ export class Plunk {
     headers?: Record<string, string>;
   }) {
     const res = await fetch(
-      new URL(url, "https://api.useplunk.com/v1").toString(),
+      new URL(url, "https://api.useplunk.com/v1/").toString(),
       {
         ...options,
         headers: {
