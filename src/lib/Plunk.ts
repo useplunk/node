@@ -66,7 +66,7 @@ export class Plunk {
         success: true;
       }>({
         method: "POST",
-        url: "/track",
+        url: "track",
         json: { ...event },
       });
     },
@@ -88,7 +88,7 @@ export class Plunk {
         success: true;
       }>({
         method: "POST",
-        url: "/send",
+        url: "send",
         json: {
           ...body,
         },
