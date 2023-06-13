@@ -54,7 +54,8 @@ Used to send a transactional email
 ##### Parameters
 - `to`: The email address of the recipient
 - `subject`: The subject of the email
-- `body`: The body of the email (HTML, plain text, or Markdown)
+- `body`: The body of the email
+- `type` [Optional]: The type of email to send (`html` or `markdown`)
 - `from` [Optional]: The email address of the sender
 - `name` [Optional]: The name of the sender
 - `withUnsubscribe` [Optional]: Whether to include an unsubscribe link hosted by Plunk in the email
@@ -63,6 +64,6 @@ Used to send a transactional email
 const success = await plunk.emails.send({
   to: "hello@useplunk.com",
   subject: "Welcome to Plunk",
-  body: "# Hello world!",
+  body: "Hello world!",
 });
 ```
