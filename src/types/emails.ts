@@ -1,5 +1,5 @@
 export interface SendParams {
-  to: string;
+  to: string | string[];
   subject: string;
   body: string;
   from?: string;
