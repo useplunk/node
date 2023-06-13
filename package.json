@@ -19,8 +19,9 @@
     "README.md"
   ],
   "dependencies": {
-    "axios": "^0.27.2",
-    "tslib": "^2.4.0"
+    "native-fetch": "^4.0.2",
+    "tslib": "^2.4.0",
+    "undici": "^5.22.1"
   },
   "devDependencies": {
     "@types/jest": "^28.1.4",
