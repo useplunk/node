@@ -81,6 +81,7 @@ export class Plunk {
      * @param {string} body.body - The body of the email
      * @param {string=} body.from - The email you want to send from
      * @param {string=} body.name - The name you want to send as
+     * @param {string=html} body.type - The type of email you want to send
      * @param {boolean=false} body.withUnsubscribe - Whether to include an unsubscribe link
      */
     send: async (body: SendParams) => {
