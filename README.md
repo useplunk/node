@@ -36,6 +36,7 @@ Used to publish an event
 ##### Parameters
 - `event`: The name of the event to publish
 - `email`: The email address of the user to publish the event to
+- `subscribed` [Optional]: Whether to the contact is subscribed to marketing emails, defaults to `true`
 - `data` [Optional]: An object containing the data to attach to the user
 
 ```ts
@@ -58,7 +59,7 @@ Used to send a transactional email
 - `type` [Optional]: The type of email to send (`html` or `markdown`)
 - `from` [Optional]: The email address of the sender
 - `name` [Optional]: The name of the sender
-- `withUnsubscribe` [Optional]: Whether to include an unsubscribe link hosted by Plunk in the email
+- `subscribed` [Optional]: Whether to the contact is subscribed to marketing emails, defaults to `false`
 
 ```ts
 const success = await plunk.emails.send({

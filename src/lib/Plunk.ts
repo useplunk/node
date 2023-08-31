@@ -60,6 +60,7 @@ export class Plunk {
      * @param {string} event.event - The event you want to publish
      * @param {string} event.email - The email associated with this event
      * @param {Object=} event.data - The user data associated with this event
+     * @param {boolean=true} event.subscribed - Whether the user is subscribed to marketing emails
      */
     track: async (event: PublishParams) => {
       return await this.fetch<{
@@ -82,7 +83,6 @@ export class Plunk {
      * @param {string=} body.from - The email you want to send from
      * @param {string=} body.name - The name you want to send as
      * @param {string=html} body.type - The type of email you want to send
-     * @param {boolean=false} body.withUnsubscribe - Whether to include an unsubscribe link
      * @param {boolean=false} body.subscribed - Whether the user is subscribed to marketing emails
      */
     send: async (body: SendParams) => {

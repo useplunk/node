@@ -5,6 +5,5 @@ export interface SendParams {
   type?: "html" | "markdown";
   from?: string;
   name?: string;
-  withUnsubscribe?: boolean;
   subscribed?: boolean;
 }
