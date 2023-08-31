@@ -1,6 +1,6 @@
 {
   "name": "@plunk/node",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Official Node.js library for useplunk.com",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
