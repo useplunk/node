@@ -83,6 +83,7 @@ export class Plunk {
      * @param {string=} body.name - The name you want to send as
      * @param {string=html} body.type - The type of email you want to send
      * @param {boolean=false} body.withUnsubscribe - Whether to include an unsubscribe link
+     * @param {boolean=false} body.subscribed - Whether the user is subscribed to marketing emails
      */
     send: async (body: SendParams) => {
       return await this.fetch<{
