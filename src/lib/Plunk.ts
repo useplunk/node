@@ -1,4 +1,3 @@
-import { fetch } from "native-fetch";
 import { PublishParams } from "../types/events";
 import { SendParams } from "../types/emails";
 import { NotFoundError } from "../errors/NotFound";
