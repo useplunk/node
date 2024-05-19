@@ -1,6 +1,6 @@
 {
   "name": "@plunk/node",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Official Node.js library for useplunk.com",
   "type": "module",
   "exports": "./dist/index.js",
