@@ -32,8 +32,6 @@ const plunk = new Plunk("Your secret key");
 const plunkCustom = new Plunk("Your secret key", { baseUrl: "https://selfhosted.example.com/api/v1/" });
 ```
 
-These changes will allow users to specify a custom API URL while maintaining backward compatibility with the existing implementation.
-
 ## API
 ### Events
 #### track()
