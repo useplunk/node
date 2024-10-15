@@ -1,10 +1,11 @@
-import { PublishParams } from "../types/events";
-import { SendParams } from "../types/emails";
+import type { PublishParams } from "../types/events";
+import type { SendParams } from "../types/emails";
 import { NotFoundError } from "../errors/NotFound";
 import { TokenError } from "../errors/TokenError";
 
 export class Plunk {
   private readonly key: string;
+  private readonly apiUrl: string;
 
   private async fetch<T>({
     json,
@@ -16,7 +17,7 @@ export class Plunk {
     headers?: Record<string, string>;
   }) {
     const res = await fetch(
-      new URL(url, "https://api.useplunk.com/v1/").toString(),
+      new URL(url, this.apiUrl).toString(),
       {
         ...options,
         headers: {
@@ -46,8 +47,9 @@ export class Plunk {
     return data as T;
   }
 
-  constructor(key: string) {
+  constructor(key: string, options: { baseUrl?: string } = {}) {
     this.key = key;
+    this.apiUrl = options.baseUrl || "https://api.useplunk.com/v1/";
   }
 
   /**

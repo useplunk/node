@@ -25,8 +25,14 @@ Any interaction you want to make with the Plunk API needs to be done through the
 ```js
 import Plunk from '@plunk/node';
 
+// Using the default API URL
 const plunk = new Plunk("Your secret key");
+
+// Or specifying a custom API URL
+const plunkCustom = new Plunk("Your secret key", { baseUrl: "https://selfhosted.example.com/api/v1/" });
 ```
+
+These changes will allow users to specify a custom API URL while maintaining backward compatibility with the existing implementation.
 
 ## API
 ### Events
